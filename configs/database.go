@@ -1,6 +1,7 @@
 package configs
 
 import (
+	"go-jwt/models"
 	"log"
 
 	"gorm.io/driver/mysql"
@@ -14,6 +15,8 @@ func ConnectDB() {
 	if err != nil {
 		panic("failed to connect database")
 	}
+
+	db.AutoMigrate(&models.User{})
 
 	DB = db
 	log.Println("Database connected")
