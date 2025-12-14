@@ -44,5 +44,14 @@ func Register(w http.ResponseWriter, r *http.Request) {
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
+	var login models.Login
+
+	if err := json.NewDecoder(r.Body).Decode(&login); err != nil {
+		helpers.Response(w, 500, err.Error(), nil)
+		return
+	}
+
+	var user models.User
+	configs.DB.First(&user)
 
 }
