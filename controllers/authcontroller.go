@@ -56,5 +56,4 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		helpers.Response(w, 404, "Wrong email or password", nil)
 		return
 	}
-
 }
