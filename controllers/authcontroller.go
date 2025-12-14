@@ -56,4 +56,10 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		helpers.Response(w, 404, "Wrong email or password", nil)
 		return
 	}
+
+	if err := helpers.VerifyPassword(user.Password, login.Password); err != nil {
+		helpers.Response(w, 404, "Wrong email or password", nil)
+		return
+	}
+
 }
