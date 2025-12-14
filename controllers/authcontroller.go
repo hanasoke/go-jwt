@@ -62,4 +62,12 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	token, err := helpers.CreateToken(&user)
+	if err != nil {
+		helpers.Response(w, 500, err.Error(), nil)
+		return
+	}
+
+	helpers.Response(w, 200, "successfully", token)
+
 }
