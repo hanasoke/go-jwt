@@ -52,6 +52,9 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var user models.User
-	configs.DB.First(&user)
+	if err := configs.DB.First(&user, "email = ?", login.Email).Error; err != nil {
+		helpers.Response(w, 404, "Wrong email or password", nil)
+		return
+	}
 
 }
