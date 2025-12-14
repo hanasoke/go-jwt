@@ -42,3 +42,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 
 	helpers.Response(w, 201, "Register Successfully", nil)
 }
+
+func Login(w http.ResponseWriter, r *http.Request) {
+
+}
