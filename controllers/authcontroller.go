@@ -17,4 +17,9 @@ func Register(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
 
+	if register.Password != register.PasswordConfirm {
+		helpers.Response(w, 400, "Password not match", nil)
+		return
+	}
+
 }
