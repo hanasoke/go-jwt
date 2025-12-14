@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"go-jwt/configs"
 	"go-jwt/helpers"
 	"go-jwt/models"
 	"net/http"
@@ -22,4 +23,22 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	passwordHash, err := helpers.HashPassword(register.Password)
+	if err != nil {
+		helpers.Response(w, 500, err.Error(), nil)
+		return
+	}
+
+	user := models.User{
+		Name:     register.Name,
+		Email:    register.Email,
+		Password: passwordHash,
+	}
+
+	if err := configs.DB.Create(&user).Error; err != nil {
+		helpers.Response(w, 500, err.Error(), nil)
+		return
+	}
+
+	helpers.Response(w, 201, "Register Successfully", nil)
 }
