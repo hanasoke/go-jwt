@@ -68,6 +68,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	helpers.Response(w, 200, "successfully", token)
+	helpers.Response(w, 200, "Successfully Login", token)
 
 }
